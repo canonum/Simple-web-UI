@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/instagram.css' rel='stylesheet'>
+        <meta charset="UTF-8">
+        <script src="./jquery.js"></script>
+        <script>
+          pageGoto = (str) => {
+            window.location.href = str;
+          }
+
+          onresize = () => {
+            document.getElementById("loading_cont").innerHTML += "";
+            setTimeout(function(){document.getElementById("loading_cont").innerHTML += "";},1);
+            }
+            onload = () =>{setTimeout(function(){window.scrollTo(0, 0);},10);}
+            closeMenu = () =>{document.getElementById("openmenu").checked = false;
+            }
+            mx=0;
+            my=0;
+            $("openmenu").click(function(){
+            $("interact").attr("x","500");
+            });
+
+            // b - beginning position
+            // e - ending position
+            // i - your current value (0-99)
+            function getTween(b, e, i) {
+              if(i>e)return e;
+              if(i<b)return b;
+              return i;
+            }
+            var a="";
+            var second=0;
+            onmousedown = function(e){second=parseInt(document.getElementById("cursorblob").getAttribute("r"));clearInterval(a);a = setInterval(function(){document.getElementById("cursorblob").setAttribute("r", getTween(50,75,second));second+=5;},0);}
+            onmouseup = function(e){second=parseInt(document.getElementById("cursorblob").getAttribute("r"));clearInterval(a);a = setInterval(function(){document.getElementById("cursorblob").setAttribute("r", getTween(50,75,second));second-=5;},0);}
+            onmousemove = function(e){mx = e.clientX; my= e.clientY;}
+            blob = document.getElementById("cursorblob");
+            setInterval(function(){ 
+                var px = mx;
+                var py = my;
+
+                px < 53 ? px=53 : null; 
+                py < 53 ? py=53 : null; 
+                py > window.innerHeight-53 ? py=window.innerHeight-53 : null; 
+                px > window.innerWidth-69 ? px=window.innerWidth-69 : null; 
+
+                document.getElementById("cursorblob").setAttribute("cx", px);
+                document.getElementById("cursorblob").setAttribute("cy", py);
+            },25);
+        </script>
+
+        <style>
+          body{
+            background-color: #ffffff;
+              padding: 0;
+              margin: 0;
+              height: calc(100% - 0px);
+              box-shadow: inset 0px 0px 2rem rgba(184, 184, 184, 1);
+              overflow-x: hidden;
+
+          font-family: "Zamazon", sans-serif;
+          }
+
+          * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+          }
+          @font-face {
+              font-family: Zamazon;
+              src: url("../src/cf.otf") format("opentype");
+          }
+
+          /* ===== Scrollbar CSS ===== */
+            /* Firefox */
+            * {
+              scrollbar-width: auto;
+              scrollbar-color: #e6e6e6 #000000;
+            }
+
+            /* Chrome, Edge, and Safari */
+            *::-webkit-scrollbar {
+              width: 10px;
+            }
+
+            *::-webkit-scrollbar-track {
+              background: #000000;
+            }
+
+            *::-webkit-scrollbar-thumb {
+              background-color: #e6e6e6;
+              border-radius: 10px;
+              border: 2px solid #000000;
+            }
+          </style>
+          
+          <!-- Left panel -->
+          <style>
+            .navMenu{
+            float: left;
+                position: fixed;
+                background: #ffffff;
+                z-index: 90;
+                width: 550px;
+                height: 100vh;
+                transform: translateX(-570px);
+                -webkit-transition: all 0.8s cubic-bezier(0.33,-0.45, 0, 0.99), height 0s linear;
+              transition: all 0.8s cubic-bezier(0.33,-0.45, 0, 0.99), height 0s linear;
+              box-shadow: 0px 0px 2rem rgba(65, 65, 65,0.3);
+
+            }
+            .navSubmenu {
+              position: relative;
+              width: 300px;
+              top: calc(400px + 25px);
+              left: calc(50% + 2.5px);
+              padding-left: 20px;
+              -webkit-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            }
+
+            .navSubmenu p {
+              text-align: center;
+              text-decoration: none;
+              font-size: 3em;
+              padding: 0.2em;
+              position: relative;
+              text-transform: uppercase;
+              font-weight: 800;
+              text-indent: -150px;
+              display: block;
+              margin-bottom: 0.6em;
+              width: 325px;
+              padding-left: 125px;
+              -webkit-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              transform-origin: -5% 100%;
+              transition-delay: 0.1s;
+              -webkit-text-stroke:rgb(0, 0, 0) 1px;
+              color:transparent;
+              
+            }
+
+            .navSubmenu p::after {
+                content: "";
+                width: 0px;
+                left: 150px;
+                height:2px;
+                float: right;
+                position: absolute;
+                display: block;
+                background: rgb(229, 0, 19);
+                pointer-events: none;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+                transition-delay: 0.1s;
+            }
+
+            .navSubmenu p:hover::after{
+                width: 300px;
+                left:20px;
+
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+                transition-delay: 0.1s;
+
+                
+              }
+              .navSubmenu p:hover{
+                text-indent: -125px;
+                -webkit-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+                transition-delay: 0.1s;
+                color: #000000;
+
+                
+              }
+              
+              .navSubmenu p:hover ~ .dot {
+                width: 9px;
+              height: 9px;
+              
+            }
+
+            .navSubmenu .dot {
+              position: absolute;
+              float: left;
+              top:0.2em;
+              left: 0.2em;
+              width: 9px;
+              height: 9px;
+              background: #e50013;
+              border-radius: 5px;
+              opacity: 0;
+              -webkit-transform: translateY(-1em);
+              transform: translateY(-1em);
+              -webkit-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              transition-delay: 0.25s;
+            }
+
+            .navSubmenu p:nth-child(1):hover ~ .dot {
+              -webkit-transform: translate(0em, 1.9em);
+              transform: translate(0em, 1.9em);
+              -webkit-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              opacity: 1;
+            }
+
+            .navSubmenu p:nth-child(2):hover ~ .dot {
+                -webkit-transform: translate(0.8em,8.5em);
+              transform: translate(0.8em,8.5em);
+              -webkit-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              opacity: 1;
+            }
+
+            .navSubmenu p:nth-child(3):hover ~ .dot {
+                -webkit-transform: translate(1.5em,15.7em);
+                transform: translate(0.8em, 15em);//maksimum yakınlaşma mesafes 0.8em
+
+              -webkit-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              opacity: 1;
+            }
+
+            .navSubmenu p:nth-child(4):hover ~ .dot {
+                -webkit-transform: translateY(26em);
+              transform: translate(-0.8em,21.6em);
+              -webkit-transition: all 0.2s ease-in-out;
+              transition: all 0.2s ease-in-out;
+              opacity: 1;
+            }
+
+            .navSocials{
+                color: white;
+                float: left;
+                height: 30px;
+                position: absolute;
+                font-size: 0.75em;
+                font: "Arial" sans-serif;
+                font-weight: 600;
+                width: 200px;
+                bottom: 0px;
+                font-weight: 600;
+                left: calc(50% + 22.5px);
+                padding-left: 20px;
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                text-transform: uppercase;
+
+            }
+            .navSocials svg{
+              width: 25px;
+              float: right;
+              height: auto;
+              -webkit-transition: all 0.1s ease-in-out;
+              transition: all 0.1s ease-in-out;
+              fill: #000000;
+              margin-right: 10px;
+            }
+
+            .navSocials svg:hover{
+              fill:rgb(229, 0, 19); 
+            }
+            .socialsIcons li{
+                float: left;
+                width: 60px;
+                position: relative;
+                height: 40px;
+            }
+
+
+            .hamburger-icon {
+              -webkit-transform: translateY(-50%);
+              transform: translateY(-50%);
+              position: fixed;
+              z-index: 95;
+              top: 90px;
+              left: 50px;
+              padding-bottom: 2vh;
+              -webkit-transition: all 0.8s cubic-bezier(0.33,-0.45, 0, 0.99), height 0s linear;
+              transition: all 0.8s cubic-bezier(0.33,-0.45, 0, 0.99), height 0s linear;
+            }
+
+            .hamburger-icon span {
+              height: 5px;
+              width: 40px;
+              background-color: black;
+              display: block;
+              border-radius: 2px;
+              
+              margin: 5px 0px 5px 0px;
+              transition: 0.3s ease-in-out;
+              transform: none;
+            }
+
+            input.hamburger-checkbox {
+              position: fixed;
+              z-index: 3;
+              top: 5vh;
+              left: 5vw;
+              width: 10vw;
+              opacity: 0;
+              height: 6vh;
+            }
+
+            #openmenu:checked ~ .hamburger-icon span:nth-of-type(2) {
+                transform: translate(0%, 175%) rotate(-45deg);
+              background-color: rgb(229, 0, 19);
+            }
+
+            #openmenu:checked ~ .hamburger-icon span:nth-of-type(3) {
+              transform: rotate(45deg);
+              background-color: rgb(229, 0, 19);
+            }
+
+            .hamburger-icon span:nth-of-type(1) {
+              opacity: 0;
+            }
+
+            .hamburger-icon span:nth-of-type(4) {
+              opacity: 0;
+            }
+
+            #openmenu:checked ~ .navMenu {
+              transform: translateX(-50px);
+            }
+            #openmenu:checked ~ .hamburger-icon {
+              transform: translate(372.5px, -50%);
+            }
+
+
+
+            .closeButton{
+              pointer-events: none;
+              width: 100%;
+              height: 100%;
+              position: fixed;
+              opacity: 0;
+              z-index: 89;//90 herşeyin üstü
+            }
+            #openmenu:checked ~ .closeButton{
+              pointer-events: all;
+            }
+
+            .logoImg{
+              -webkit-filter: drop-shadow(0px 0px 1px rgb(0, 0, 0)) ;
+              filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.0)) ;
+              animation: titleLoop 2s infinite ease-in-out;
+              position: fixed;
+              z-index: 60;
+              user-select: none;
+              -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: -moz-none;
+                -o-user-select: none;
+                user-select: none;
+              cursor: pointer;
+              font-size: 3em;
+              letter-spacing: 0em;
+              margin-top: 10px;
+              font-weight: 600;
+              float: right;
+              right: 50px;
+              top: 45px;
+              height: 75px;
+              width: auto;
+
+            }
+            @keyframes titleLoop {
+              0%{-webkit-filter: drop-shadow(0px 0px 1px rgba(0, 0, 0,0.1)) ;
+              filter: drop-shadow(0px 0px 1.5px rgba(0, 0, 0, 0.2)) ;}  
+              50%{-webkit-filter: drop-shadow(0px 0px 1px rgba(0, 0, 0,0.7)) ;
+              filter: drop-shadow(0px 0px 1.5px rgba(0, 0, 0, 0.8)) ;}  
+              100%{-webkit-filter: drop-shadow(0px 0px 1px rgba(0, 0, 0,0.1)) ;
+              filter: drop-shadow(0px 0px 1.5px rgba(0, 0, 0, 0.2)) ;}  
+            }
+            .logoAddition{
+              width: 250px;
+              height: auto;
+              top: 75px;
+              left: 70px;
+              padding-left: 20px;
+              -webkit-transform: translate(0%, -50%);
+              transform: translate(0%, -50%);
+            }
+
+            .headerimage{
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                z-index: 2;
+                height: auto;
+                margin-bottom: 700px;
+            }
+
+
+          </style>
+          <!-- liquid svg -->
+          <style>
+            .loading_cont {
+                
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            margin:0px;
+            padding: 0px;
+            z-index: 10;
+            pointer-events: none;
+            -webkit-transition: all 1s cubic-bezier(0.33,-0.45, 0, 0.99);
+              transition: all 0.8s cubic-bezier(0.33,-0.45, 0, 0.99);
+            
+            }
+
+
+            #loader {
+              display: inline-block;
+              position: relative;
+              width: 100%;
+              height: 100%;
+              top: 0px;
+              left: 0px;
+            }
+
+            rect {
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            }
+
+            .blobs {
+            -webkit-filter: url("#goo");
+            filter: url("#goo");
+            }
+
+            .blob {
+              fill: rgb(255, 255, 255)
+            }
+          </style>
+          <!-- liquid svg -->
+          <style>
+
+
+
+
+
+.backgroundText{
+  -webkit-text-stroke:rgb(255, 255, 255)2.5vw;//transparan ama textshadowla çözüldü
+  user-select: none;
+  color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  font-weight: 800;
+  height: 100%;  
+  background:transparent;
+}
+
+
+.innerSpacing2 div{
+  -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+  text-shadow: 0px 0px 5px rgb(255, 255, 255),0px 0px 6rem rgb(230, 230, 230);
+  width: 240%;
+  line-height: 0.9;
+  text-align: center;
+  letter-spacing: .09em;
+  font-size: 30.3vw;
+  height: 40%;
+  float: left;
+  position: relative;
+  background:transparent;
+  left: -0vw;
+}
+.innerSpacing2 div:nth-child(1){
+  left: calc(-1em + 0px);
+}
+.innerSpacing2 div:nth-child(2){
+  left: calc(-3em + 0px);
+}
+.innerSpacing2 div:nth-child(3){
+  left: calc(-2em + 0px);
+}
+.innerSpacing2 div:nth-child(4){
+  left: calc(-3em + 0px);
+}
+.innerSpacing2 div:nth-child(5){
+  left: calc(-1em + 0px);
+}
+.innerSpacing2 div:nth-child(6){
+  left: calc(-2em + 0px);
+}
+
+
+
+main{
+    padding: 0px 0px;
+    width: 100%;
+    height: auto;
+    background-color: rgba(10, 200, 100, 0.0002);
+    position: absolute;
+    z-index: 7;
+}
+
+.parent {
+  width: 100%;
+
+
+}
+
+.page0{
+
+width: 100%;
+height: 100vh;
+position: relative;
+background-color: rgba(229, 0, 19, 0);
+}
+
+.title{
+  font-family: Zamazon,sans-serif;
+  font-size: 3.5em;
+  font-weight: 800;
+  position: relative;
+  -webkit-text-stroke:rgb(0, 0, 0) .07em;
+
+  top: 150px;
+  left:125px;
+  width: 880px;
+  background-color: rgba(61, 207, 117, 0.000479);
+}
+.title p:nth-child(2){
+  font-size: .8em;
+  -webkit-text-stroke:rgb(0, 0, 0) .04em;
+
+}
+
+.tright{
+  left:unset;
+  float: right;
+  right: 325px;
+}
+.tright p{
+  text-align: right;
+  text-indent: -0em;
+}
+.tright p:nth-child(2){
+  position: relative;
+  text-align: left;
+  left: 75px;
+}
+
+
+
+i {
+	position: absolute;
+	display: block;
+	width: calc(100% - 10px);
+  bottom: 16px;
+  left:5px;
+	height: 400px;
+	overflow: hidden;
+	border-radius: 5px;
+  font-family: "Segoe MDL2 Assets";
+  font-size: 1.4em;
+  font-style: normal;
+  
+}
+
+i:before, i:after {
+	content: '';
+  position: absolute;
+	top: calc(50% - 1rem);
+	left: 1rem;
+	z-index: 23;
+	width: 2rem;
+	height: 2rem;
+	color: rgb(255, 255, 255);
+  background-color: rgba(190, 190, 190, 0.315);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+}
+
+i:after {
+	content: '';
+  
+	left: auto;
+	right: 1rem;
+}
+
+/* I haven't found a way for IE and Edge to let me style inputs that way */
+input {
+	appearance: none;
+	-ms-appearance: none;
+	-webkit-appearance: none;
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+  cursor: pointer;
+	left: 0;
+	border-radius: 5px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	transform: translateX(100%);
+	transition: transform ease-in-out 400ms;
+	z-index: 1;
+}
+input::before:hover{
+  cursor: pointer;
+}
+input:focus {
+	outline: none;
+}
+
+input:after {
+	content: attr(title);
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	background-color: rgba(0,0,0,0.4);
+	color: white;
+	padding: .5rem;
+	font-size: 1rem;
+	border-radius: 5px;
+}
+
+input:not(checked):before {
+	content: '';
+	position: absolute;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	top: 50%;
+  transform: translateY(-50%);
+	left: calc(-100% + 1rem);
+}
+
+input:checked:before {
+	display: none;
+	left: 1rem;
+}
+
+input:checked {
+	transform: translateX(0);
+	pointer-event: none;
+	z-index: 0;
+	box-shadow: -5px 10px 20px -15px rgba(0,0,0,1);
+}
+
+input:checked + input:before {
+	left: -3rem;
+}
+
+input:checked + input ~ input:before {
+	display: none;
+}
+
+
+
+
+
+
+
+
+.container {
+  position: relative;
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  margin: auto;
+}
+.container .box {
+  position: relative;
+  width: 275px;
+  height: 275px;
+  background: #000;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  margin-right: 25px;
+  box-shadow: 0 5px 10px 2px rgba(0,0,0,0.5);
+  margin-top: 45px;
+  border-radius:10px;
+}
+.container:hover .box {
+  transform: rotateY(25deg);
+}
+.container .box:hover ~ .box {
+  transform: rotateY(-25deg);
+}
+.container .box:hover {
+  transform: rotateY(0deg) scale(1.25);
+  z-index: 1;
+  box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+}
+.container .box .imgBx {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+}
+.container .box .imgBx:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,rgb(229, 0, 19),#000000);
+  z-index: 1;
+  opacity: 0;
+  transition: 0.5s;
+  mix-blend-mode: multiply;
+}
+.container .box:hover .imgBx:before {
+  opacity: 1;
+}
+.container .box .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+.container .box .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  padding: 20px;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+.container .box .content h2 {
+  color: #fff;
+  transition: 0.5s;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: 20px;
+  transform: translateY(200px);
+  transition-delay: 0.3s;
+}
+.container .box:hover .content h2 {
+  transform: translateY(0px);
+}
+.container .box .content p {
+  color: #fff;
+  transition: 0.5s;
+  font-size: 14px;
+  transform: translateY(200px);
+  transition-delay: 0.4s;
+}
+.container .box:hover .content p {
+  transform: translateY(0px);
+}
+
+
+
+
+
+
+
+
+
+*, *:before, *:after {
+  -webkit-font-smoothing: antialiased;
+}
+
+.background {
+  display: flex;
+  min-height: 100vh;
+}
+
+.containerr {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  flex: 0 1 700px;
+  margin: auto;
+  padding: 10px;
+}
+
+.screen {
+  height: 500px;
+  position: relative;
+  background: #3e3e3e;
+  border-radius: 15px;
+}
+
+.screen:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  bottom: 0;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+  z-index: -1;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #4d4d4f;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.screen-header-left {
+  margin-right: auto;
+}
+
+.screen-header-button {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 3px;
+  border-radius: 8px;
+  background: white;
+}
+
+.screen-header-button.close {
+  background: #ed1c6f;
+}
+
+.screen-header-button.maximize {
+  background: #e8e925;
+}
+
+.screen-header-button.minimize {
+  background: #74c54f;
+}
+
+.screen-header-right {
+  display: flex;
+}
+
+.screen-header-ellipsis {
+  width: 3px;
+  height: 3px;
+  margin-left: 2px;
+  border-radius: 8px;
+  background: #999;
+}
+
+.screen-body {
+  display: flex;
+}
+
+.screen-body-item {
+  flex: 1;
+  height: 400px;
+  padding: 50px;
+}
+
+.screen-body-item.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-title {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: #ea1d6f;
+  font-size: 26px;
+}
+
+.app-title:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 25px;
+  height: 4px;
+  background: #ea1d6f;
+}
+
+.app-contact {
+  margin-top: auto;
+  font-size: 8px;
+  color: #888;
+}
+
+.app-form-group {
+  margin-bottom: 5px;
+}
+
+.app-form-group.message {
+  margin-top: 40px;
+}
+
+.app-form-group.buttons {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.app-form-control {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: #ddd;
+  font-size: 14px;
+  float: left;
+  position: relative;
+  left: -230px;
+  height: 40px;
+  line-height: 0;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.app-form-control::placeholder {
+  color: #666;
+}
+
+.app-form-control:focus {
+  border-bottom-color: #ddd;
+}
+
+.app-form-button {
+  background: none;
+  border: none;
+  color: #ea1d6f;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.app-form-button:hover {
+  color: #b9134f;
+}
+
+.credits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  color: #ffa4bd;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.credits-link {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.dribbble {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+
+@media screen and (max-width: 520px) {
+  .screen-body {
+    flex-direction: column;
+  }
+
+  .screen-body-item.left {
+    margin-bottom: 30px;
+  }
+
+  .app-title {
+    flex-direction: row;
+  }
+
+  .app-title span {
+    margin-right: 12px;
+  }
+
+  .app-title:after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .screen-body {
+    padding: 40px;
+  }
+
+  .screen-body-item {
+    padding: 0;
+  }
+}
+
+
+
+
+
+
+
+
+        </style>
+        
+         
+    </head>
+    <body>
+      <div class="backgroundText">
+        <div class="innerSpacing2">
+          <div>CMMGRUP</div>
+          <div>CMMGRUP</div>
+          <div>CMMGRUP</div>
+          <div>CMMGRUP</div>
+          <div>CMMGRUP</div>
+          <div>CMMGRUP</div>
+        </div>
+
+        
+      </div>
+
+
+      </div>
+      <p onclick="pageGoto('http://127.0.0.1/UNSECURE/CMM/pub/')" class="logoImg">CMM GRUP</p>
+      <img STYLE="display: none;" class="logoImg" src="./cmm_logo.png">
+        <input type="checkbox" id="openmenu" class="hamburger-checkbox">
+        <div class="hamburger-icon">
+            <label for="openmenu" id="hamburger-label">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>    
+        </div>
+        <button class="closeButton" onclick="closeMenu()">close menu.</button>
+        
+        
+        
+        <div id="loading_cont" class="loading_cont">
+            <svg version="1.2" xmlns="http://www.w3.org/2000/svg" id="loader">
+                <defs>
+                    
+                    <filter id="goo">
+                        <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="16" />
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 -18 7" result="goo" />
+                        
+                    </filter>
+                </defs>
+
+                <mask id="maska">
+                    <g class="blobs">
+                        <rect id="interact" x="24" y="28" width="calc(100% - 48px)" height="calc(100% - 56px)" fill="white" rx="0" class="blob interblock"></rect>
+                        <circle id="cursorblob" class="blob" cx="20" cy="160" r="50"  transform="rotate(0) translate(0, 0) rotate(0)"/>
+                    </g>
+                </mask>
+                <rect x="0" y="0" mask="url(#maska)" fill="#f7f7f7" width="100%" height="100%">
+                </svg>	
+
+        </div>
+                    
+                
+                
+                
+                <nav class="navMenu">
+                    <img class="logoImg logoAddition" src="./cmm-logo.png">
+
+                    <div class="navSubmenu">
+                        <p onclick="window.scrollTo(0,0);" >ANASAYFA</p>
+                        <p onclick="window.scrollTo(0,window.innerHeight);" >PROJELER</p>
+                        <p onclick="window.scrollTo(0,2*window.innerHeight);" >İLETİŞİM</p>
+                        <p href="#">HAKKIMIZDA</p>
+                        <div class="dot"></div>
+                    </div>
+                    
+                    <div class="navSocials">
+                      <a href="https:/example.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg></a>
+                      <a href="https:/example.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg></a>
+                      <a href="https:/example.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+                      <a href="https:/example.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg></a>
+                      <a href="https:/example.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+                    </div>
+                </nav>
+
+                
+                <main class="parent">
+                  <div id="page1" class="page0">
+                    <div style="top:50px" class="title">
+                      <p>CMM GRUP</p>
+                      <p>olarak dijital dünyada sizlere katabileceğimiz efsanevi şeyler için kaydırın!</p>
+                    </div>
+                    <div class="slider">
+                      <i>
+                        <input checked type="radio" name="s" style="background-image: url('https://picsum.photos/500/300?random=1');" title="Random Picture 1">
+                        <input type="radio" name="s" style="background-image: url('https://picsum.photos/500/300?random=2');" title="Random Picture 2">
+                        <input type="radio" name="s" style="background-image: url('https://picsum.photos/500/300?random=3');" title="Random Picture 3">
+                        <input type="radio" name="s" style="background-image: url('https://picsum.photos/500/300?random=4');" title="Random Picture 4">
+                        <input type="radio" name="s" style="background-image: url('https://picsum.photos/500/300?random=5');" title="Random Picture 5">
+                      </i>
+                    </div>
+                  </div>
+                  
+                  <div id="page2" class="page0">
+                    <div style="top:100px" class="title alttitle">
+                      <p>PROJELERIMIZ</p>
+                      <p>Tasarladığımız şu muhteşem projelere bir göz atın!</p>
+                    </div>
+                    <br><br><br>
+                    <br><br>
+                    <div class="container">
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1579748138140-ce9ef2c32db1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1579639782539-15cc6c0be63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1603984362497-0a878f607b92?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1579310962131-aa21f240d986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br><br>
+                    <div class="container">
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1603984362497-0a878f607b92?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1579748138140-ce9ef2c32db1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1579310962131-aa21f240d986?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="box">
+                        <div class="imgBx">
+                          <img src="https://images.unsplash.com/photo-1579639782539-15cc6c0be63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80">
+                        </div>
+                        <div class="content">
+                          <div>
+                            <h2>RESİM BAŞLIĞI</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi accusamus molestias quidem iusto.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="page3" class="page0">
+                    <div class="title alttitle">
+                      <p>BİZE ULAŞIN</p>
+                      <p>Bu kanallardan bizimle iletişime geçebilirsiniz!</p>
+                    </div>
+                    <br>
+                    <div class="background">
+                      <div class="containerr">
+                        <div class="screen">
+                          <div class="screen-header">
+                            <div class="screen-header-left">
+                              <div class="screen-header-button close"></div>
+                              <div class="screen-header-button maximize"></div>
+                              <div class="screen-header-button minimize"></div>
+                            </div>
+                            <div class="screen-header-right">
+                              <div class="screen-header-ellipsis"></div>
+                              <div class="screen-header-ellipsis"></div>
+                              <div class="screen-header-ellipsis"></div>
+                            </div>
+                          </div>
+                          <div class="screen-body">
+                            <div class="screen-body-item left">
+                              <div class="app-title">
+                                <span>BİZE</span>
+                                <span>ULAŞIN</span>
+                              </div>
+                              <div style="position:relative;top:-150px;width: 300px;font-size: 0.9em;font-family: 'Zamazon';" class="app-contact"><pre>
+TELEFON NUMARALARIMIZ: +90 131 492 85 95
+                       +90 553 800 70 70
+
+INSTAGRAM ADRESİMİZ: @cmmgrup
+                                                      </pre></div>
+                            </div>
+                            <div class="screen-body-item">
+                              <div class="app-form">
+                                <div class="app-form-group">
+                                  <input class="app-form-control" placeholder="ADINIZ" >
+                                </div>
+                                <div class="app-form-group">
+                                  <input class="app-form-control" placeholder="MAİL ADRESİNİZ">
+                                </div>
+                                <div class="app-form-group">
+                                  <input class="app-form-control" placeholder="TELEFON NUMARANIZ">
+                                </div>
+                                <div class="app-form-group message">
+                                  <input class="app-form-control" placeholder="MESAJINIZ">
+                                </div>
+                                <div class="app-form-group buttons">
+                                  <button class="app-form-button">İPTAL</button>
+                                  <button class="app-form-button">GÖNDER</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </main>
+              </body>
+            
+            </html>
